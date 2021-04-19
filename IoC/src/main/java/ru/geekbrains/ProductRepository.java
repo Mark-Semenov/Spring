@@ -28,7 +28,7 @@ public class ProductRepository {
     }
 
     public void showProducts() {
-        System.out.println("There is next products at the shop");
+        System.out.println("There are next products at the shop");
         for (Product product : products) {
             System.out.println(product.getId() + " " + product.getName() + " " + product.getPrice());
         }
