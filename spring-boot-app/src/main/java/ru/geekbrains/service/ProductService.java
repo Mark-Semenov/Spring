@@ -2,43 +2,33 @@ package ru.geekbrains.service;
 
 import org.springframework.stereotype.Service;
 import ru.geekbrains.entities.Product;
-import ru.geekbrains.repository.ProductRepository;
+import ru.geekbrains.DAO.ProductDAO;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 public class ProductService {
 
-    private final ProductRepository repository;
-    private final AtomicLong atomicLong = new AtomicLong(3);
+    private final ProductDAO productDAO;
 
-
-    public ProductService(ProductRepository repository) {
-        this.repository = repository;
+    public ProductService(ProductDAO productDAO) {
+        this.productDAO = productDAO;
     }
 
     public void addProduct(Product product) {
-        product.setId(atomicLong.incrementAndGet());
-        repository.getProducts().add(product);
+        productDAO.saveOrUpdate(product);
     }
 
     public Product getById(Long id) {
-        Product product = null;
-        for (Product p: repository.getProducts()) {
-            if (p.getId().equals(id)){
-                product = p;
-            }
-        }
-        return product;
+        return productDAO.getById(id);
     }
 
     public List<Product> getAllProducts() {
-        return repository.getProducts();
+        return productDAO.getProducts();
     }
 
     public void deleteProduct(Long id) {
-        repository.removeById(id);
+        productDAO.removeById(id);
     }
 
 }
