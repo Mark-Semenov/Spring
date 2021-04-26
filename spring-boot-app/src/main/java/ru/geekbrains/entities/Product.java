@@ -1,22 +1,33 @@
 package ru.geekbrains.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 @NamedQueries({
         @NamedQuery(name = "GET_PRODUCTS", query = "select p from Product p"),
-        @NamedQuery(name = "GET_BY_ID", query = "select p from Product p where p.id = :id")
+        @NamedQuery(name = "GET_BY_ID", query = "select p from Product p where p.id = :id"),
+        @NamedQuery(name = "GET_PRODUCTS_BY_USER_ID", query = "select p from Product p inner join p.users as u where u.id = :id")
 })
 
 @Entity
 @Table(name = "products")
-public class Product {
+public class Product implements Serializable {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private BigDecimal price;
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_orders",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<User> users;
 
     public Product() {
     }
@@ -49,5 +60,22 @@ public class Product {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                '}';
     }
 }

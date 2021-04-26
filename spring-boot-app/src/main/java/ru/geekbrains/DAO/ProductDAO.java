@@ -1,26 +1,18 @@
 package ru.geekbrains.DAO;
 
-import org.hibernate.cfg.Configuration;
 import org.springframework.stereotype.Repository;
 import ru.geekbrains.entities.Product;
 
-import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
 public class ProductDAO {
 
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
-    @PostConstruct
-    public void init() {
-        EntityManagerFactory factory = new Configuration()
-                .configure("hibernate.cfg.xml")
-                .buildSessionFactory();
-        entityManager = factory.createEntityManager();
+    public ProductDAO(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 
     public List<Product> getProducts() {
@@ -30,7 +22,13 @@ public class ProductDAO {
     public Product getById(Long id) {
         return entityManager.createNamedQuery("GET_BY_ID", Product.class).setParameter("id", id).getSingleResult();
     }
-    @Transactional
+
+
+    public List<Product> getProductsByUserId(Long id) {
+        return entityManager.createNamedQuery("GET_PRODUCTS_BY_USER_ID", Product.class).setParameter("id", id).getResultList();
+    }
+
+
     public void removeById(Long id) {
         entityManager.getTransaction().begin();
         entityManager.remove(getById(id));
@@ -48,5 +46,6 @@ public class ProductDAO {
             entityManager.getTransaction().commit();
         }
     }
+
 
 }

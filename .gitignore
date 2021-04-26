@@ -6,6 +6,8 @@ test/
 .idea/
 out/
 *.iml
+.mvn/
+HELP.md
 
 # Log file
 *.log
