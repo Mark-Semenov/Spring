@@ -39,15 +39,15 @@ public class ProductService {
     }
 
     public List<Product> filteringByMinPrice() {
-        return productRepository.filteringByMinPrice();
+        return productRepository.filterByMinPrice();
     }
 
     public List<Product> filteringByMaxPrice() {
-        return productRepository.filteringByMaxPrice();
+        return productRepository.filterByMaxPrice();
     }
 
     public List<Product> filteringByMiddlePrice() {
-        return productRepository.filteringByMiddlePrice();
+        return productRepository.filterByMiddlePrice();
     }
 
 }

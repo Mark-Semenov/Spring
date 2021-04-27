@@ -9,14 +9,14 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query ("select p from Product p where p.price < (select max (p.price) from Product p) order by p.price")
-    List<Product> filteringByMinPrice();
+    List<Product> filterByMinPrice();
 
     @Query ("select p from Product p where p.price > (select min (p.price) from Product p) order by p.price desc")
-    List<Product> filteringByMaxPrice();
+    List<Product> filterByMaxPrice();
 
     @Query ("select p from Product p where p.price > (select min (p.price) from Product p)" +
             "and p.price < (select max (p.price) from Product p) " +
             "order by p.price DESC ")
-    List<Product> filteringByMiddlePrice();
+    List<Product> filterByMiddlePrice();
 
 }
