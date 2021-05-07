@@ -1,5 +1,7 @@
 package ru.geekbrains.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import ru.geekbrains.entities.Product;
@@ -18,5 +20,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "and p.price < (select max (p.price) from Product p) " +
             "order by p.price DESC ")
     List<Product> filterByMiddlePrice();
+
+    Page<Product> findAll(Pageable pageable);
 
 }
