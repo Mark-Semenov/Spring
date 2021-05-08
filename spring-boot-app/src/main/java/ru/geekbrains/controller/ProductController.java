@@ -16,11 +16,11 @@ import ru.geekbrains.service.ProductService;
 import java.util.List;
 
 @Controller
-public class RestController {
+public class ProductController {
 
     private final ProductService productService;
 
-    public RestController(ProductService productService) {
+    public ProductController(ProductService productService) {
         this.productService = productService;
     }
 
