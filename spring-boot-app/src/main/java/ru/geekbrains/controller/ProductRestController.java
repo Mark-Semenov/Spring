@@ -65,9 +65,9 @@ public class ProductRestController {
     }
 
     @DeleteMapping("/cart")
-    public String removeProdFromCart(@RequestBody String productName){
-        cart.removeProductFromCart(productName);
-        System.out.println(productName);
+    public String removeProdFromCart(@RequestBody ProductDTO product){
+        cart.removeProductFromCart(product.getName());
+        System.out.println(product.getName());
         System.out.println(cart.getUserProducts().size());
         cart.getUserProducts().forEach(System.out::println);
         return HttpStatus.OK.toString();
