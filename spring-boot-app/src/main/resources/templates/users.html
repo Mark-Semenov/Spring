@@ -27,7 +27,12 @@
             <td th:each="role : ${user.roles}" th:text="${role.getTitle()}"/>
         </tr>
         </tbody>
+
     </table>
+
+    <div>
+        <a th:href="@{'/admin/users/add'}">Add user</a>
+    </div>
 </div>
 
 
