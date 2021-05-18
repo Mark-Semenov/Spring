@@ -10,24 +10,30 @@
 
 <body>
 
-    <div class="top">
-        <h2>Add User</h2>
-        <form class="mb-3" th:action="@{/admin/users/add}" th:object="${user}" method="POST">
-            <div>
-                <input type="hidden" th:field="*{id}"/>
-            </div>
-            <div>
-                <output for="name">Name</output>
-                <input type="text" th:field="*{name}"/>
-            </div>
-            <div>
-                <output for="price">Role</output>
-                <input th:object="${role}" id="price" type="text" th:field="*{title}"/>
-            </div>
-            <button th:if="${user.id == null}">Add</button>
-            <button th:if="${user.id != null}">Update</button>
-        </form>
-    </div>
+<div class="top">
+    <h2>Add User</h2>
+    <form class="mb-3" th:action="@{/admin/users/add}" th:object="${user}" method="POST">
+        <div>
+            <input type="hidden" th:field="*{id}"/>
+        </div>
+        <div>
+            <output for="name">Name</output>
+            <input type="text" th:field="*{name}"/>
+        </div>
+        <div>
+            <output for="name">Role</output>
+            <select th:object="${role}" type="text" th:field="*{title}">
+                <option th:each="r : ${roles}" th:value="${r.title}" th:text="${r.title}"/>
+            </select>
+        </div>
+        <div>
+            <output for="name">Password</output>
+            <input type="text" th:field="*{password}"/>
+        </div>
+        <button th:if="${user.id == null}">Add</button>
+        <button th:if="${user.id != null}">Update</button>
+    </form>
+</div>
 
 
 </body>

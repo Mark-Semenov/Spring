@@ -29,9 +29,7 @@ public class UserService implements UserDetailsService {
 
     @Transactional
     public void saveOrUpdate(ru.geekbrains.entities.User user) {
-        if (user.getId() != null) {
             userRepository.save(user);
-        }
     }
 
     public List<ru.geekbrains.entities.User> getAllUsers() {
