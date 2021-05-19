@@ -1,5 +1,6 @@
 package ru.geekbrains.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -17,18 +18,12 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
+@RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
     private final RoleRepository roleRepository;
     private final PasswordEncoder encoder;
-
-    public UserController(UserService userService, RoleRepository roleRepository, PasswordEncoder encoder) {
-        this.userService = userService;
-        this.roleRepository = roleRepository;
-        this.encoder = encoder;
-    }
-
 
     @GetMapping("/users")
     public String getAllUsers(Model model) {

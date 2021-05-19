@@ -1,5 +1,6 @@
 package ru.geekbrains.config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -12,13 +13,10 @@ import ru.geekbrains.service.UserService;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
+@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserService userService;
-
-    public SecurityConfig(UserService userService) {
-        this.userService = userService;
-    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -31,20 +29,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/admin/users", true);
     }
 
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        UserDetails user1 = User.builder()
-//                .username("user1")
-//                .password(passwordEncoder().encode("password"))
-//                .roles("USER")
-//                .build();
-//        UserDetails user2 = User.builder()
-//                .username("user2")
-//                .password(passwordEncoder().encode("password"))
-//                .roles("ADMIN")
-//                .build();
-//        return new InMemoryUserDetailsManager(user1, user2);
-//    }
 
     @Bean
     public DaoAuthenticationProvider authenticationConfigurer() {

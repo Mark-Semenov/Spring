@@ -1,5 +1,6 @@
 package ru.geekbrains.entities;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
@@ -12,21 +13,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class Cart {
 
     private List<Product> userProducts;
     private final ProductRepository productRepository;
 
-    public Cart(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
-
     @PostConstruct
     public void init() {
         userProducts = new ArrayList<>();
     }
-
 
     public void addProductToCart(ProductDTO product) {
         userProducts.add(productRepository.findByName(product.getName()));

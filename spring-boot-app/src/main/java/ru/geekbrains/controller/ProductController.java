@@ -1,5 +1,6 @@
 package ru.geekbrains.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -16,13 +17,10 @@ import ru.geekbrains.service.ProductService;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class ProductController {
 
     private final ProductService productService;
-
-    public ProductController(ProductService productService) {
-        this.productService = productService;
-    }
 
     @GetMapping("/add")
     public String index(Model model) {
