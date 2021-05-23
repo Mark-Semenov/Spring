@@ -3,7 +3,6 @@ package ru.geekbrains.entities;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -33,6 +32,11 @@ public class Product {
     private List<User> users;
 
     public Product() {
+    }
+
+    public Product(String name, BigDecimal price) {
+        this.name = name;
+        this.price = price;
     }
 
     public Product(Long id, String name, BigDecimal price) {
