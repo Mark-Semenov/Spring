@@ -22,6 +22,7 @@
         <td th:text="${product.name}"/>
         <td th:text="${product.price}"/>
         <td><a th:href="@{'/products/' + ${product.id}}">Get</a></td>
+        <td><a th:href="@{'/update/' + ${product.id}}">Update</a></td>
         <td><a th:href="@{'/delete/' + ${product.id}}">Delete</a></td>
     </tr>
     </tbody>

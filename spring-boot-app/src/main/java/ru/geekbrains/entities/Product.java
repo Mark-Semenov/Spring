@@ -1,9 +1,19 @@
 package ru.geekbrains.entities;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 
+@NamedQueries({
+        @NamedQuery(name = "GET_PRODUCTS", query = "select p from Product p"),
+        @NamedQuery(name = "GET_BY_ID", query = "select p from Product p where p.id = :id")
+})
+
+@Entity
+@Table(name = "products")
 public class Product {
 
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private BigDecimal price;

@@ -47,6 +47,18 @@ public class IndexController {
         return "redirect:/products";
     }
 
+    @GetMapping("/update/{id}")
+    public String updateProducts(Model model, @PathVariable(value = "id") Long id){
+        model.addAttribute("product", productService.getById(id));
+        return "shop";
+    }
+
+    @PostMapping("/update/{id}")
+    public String update(@PathVariable Long id){
+        productService.addProduct(productService.getById(id));
+        return "redirect:/products";
+    }
+
     @GetMapping("products/{id}")
     public String showProducts(Model model, @PathVariable(value = "id") Long id){
         model.addAttribute("product", productService.getById(id));
