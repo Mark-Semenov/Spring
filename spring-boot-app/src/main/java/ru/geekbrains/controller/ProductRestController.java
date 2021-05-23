@@ -1,6 +1,7 @@
 package ru.geekbrains.controller;
 
 import javassist.NotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.dto.ProductDTO;
@@ -10,18 +11,13 @@ import ru.geekbrains.service.ProductRepository;
 
 import java.util.List;
 
-
+@RequiredArgsConstructor
 @RequestMapping("/api/v1/product")
 @RestController
 public class ProductRestController {
 
     private final ProductRepository productRepository;
     private final Cart cart;
-
-    public ProductRestController(ProductRepository productRepository, Cart cart) {
-        this.productRepository = productRepository;
-        this.cart = cart;
-    }
 
     @GetMapping("/all")
     public List<Product> findAllProd() {

@@ -1,5 +1,6 @@
 package ru.geekbrains.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,15 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
-
-    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
-        this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
-    }
 
     @Override
     @Transactional
@@ -29,7 +25,7 @@ public class UserService implements UserDetailsService {
 
     @Transactional
     public void saveOrUpdate(ru.geekbrains.entities.User user) {
-            userRepository.save(user);
+        userRepository.save(user);
     }
 
     public List<ru.geekbrains.entities.User> getAllUsers() {
