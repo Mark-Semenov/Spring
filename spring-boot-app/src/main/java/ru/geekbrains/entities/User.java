@@ -1,24 +1,18 @@
 package ru.geekbrains.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.List;
-
-@NamedQueries({
-        @NamedQuery(name = "GET_PROD", query = "select u.product from User u where u.id = :id"),
-        @NamedQuery(name = "GET_USERS_BY_PROD_ID", query = "select u from User u inner join u.product as p where p.id = :id")
-})
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private String password;
+
 
     @ManyToMany
     @JoinTable(
@@ -27,6 +21,15 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
     private List<Product> product;
+
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "roles_id")
+    )
+    private List<Role> roles;
 
     public User() {
     }
@@ -59,6 +62,22 @@ public class User {
         this.product = product;
     }
 
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -66,4 +85,5 @@ public class User {
                 ", name='" + name + '\'' +
                 '}';
     }
+
 }

@@ -52,7 +52,7 @@ public class ProductService {
         return productRepository.filterByMiddlePrice();
     }
 
-    public Page<Product> pageWithProducts(Pageable pageable){
+    public Page<Product> pageWithProducts(Pageable pageable) {
         return productRepository.findAll(pageable);
     }
 

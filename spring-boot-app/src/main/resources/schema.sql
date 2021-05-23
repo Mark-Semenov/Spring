@@ -9,8 +9,21 @@ CREATE TABLE users
 );
 
 INSERT INTO users (name, password)
-VALUES ('user1', 'pas1'),
-       ('user2', 'pas2');
+VALUES ('user1', '$2y$12$f06iCJFDF0z88mTLSVYFSOVACgG4ybjFk6bxvZhFFlggsBzVsLr4S'),
+       ('user2', '$2y$12$AF2njjC7.9E68LxqAl.iUey.YE9G6Nj3iPc0Myc/YZGDo0cZN.14y'),
+       ('user3', '$2y$12$QcQIP.KdBL2HhXcs9WzTP.AiapNF8QLoPM4.fstAsqZCj0fTehAM6');
+
+DROP TABLE IF EXISTS roles CASCADE;
+CREATE TABLE roles
+(
+    id       BIGSERIAL PRIMARY KEY,
+    title     VARCHAR(255)
+);
+
+INSERT INTO roles (title)
+VALUES ('ROLE_USER'),
+       ('ROLE_ADMIN'),
+       ('ROLE_SUPER_ADMIN');
 
 DROP TABLE IF EXISTS products CASCADE;
 CREATE TABLE products
@@ -49,11 +62,24 @@ CREATE TABLE user_orders
 
 INSERT INTO user_orders (user_id, product_id)
 VALUES (1, 1),
-       (1, 2),
+       (2, 2),
        (1, 3),
        (2, 4),
        (2, 5),
        (2, 1);
+
+
+DROP TABLE IF EXISTS user_roles CASCADE;
+CREATE TABLE user_roles
+(
+    user_id    BIGINT REFERENCES users (id) ON DELETE CASCADE,
+    roles_id BIGINT REFERENCES roles (id)
+);
+
+INSERT INTO user_roles (user_id, roles_id)
+VALUES (1, 1),
+       (2, 2),
+       (3, 3);
 
 COMMIT;
 

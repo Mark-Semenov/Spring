@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop</title>
+</head>
+
+<body>
+<div style="width: 800px; padding-left: 250px">
+    <h1>Users</h1>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <td>Id</td>
+            <td>Name</td>
+            <td>Role</td>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.id}"/>
+            <td th:text="${user.name}"/>
+            <td th:each="role : ${user.roles}" th:text="${role.getTitle()}"/>
+        </tr>
+        </tbody>
+
+    </table>
+
+    <div>
+        <a th:href="@{'/admin/users/add'}">Add user</a>
+    </div>
+</div>
+
+
+</body>
+
+</html>

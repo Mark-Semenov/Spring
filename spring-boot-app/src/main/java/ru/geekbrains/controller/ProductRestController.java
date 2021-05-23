@@ -1,10 +1,8 @@
 package ru.geekbrains.controller;
 
 import javassist.NotFoundException;
-import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.WebApplicationContext;
 import ru.geekbrains.dto.ProductDTO;
 import ru.geekbrains.entities.Cart;
 import ru.geekbrains.entities.Product;
@@ -15,7 +13,6 @@ import java.util.List;
 
 @RequestMapping("/api/v1/product")
 @RestController
-@Scope(WebApplicationContext.SCOPE_SESSION)
 public class ProductRestController {
 
     private final ProductRepository productRepository;
