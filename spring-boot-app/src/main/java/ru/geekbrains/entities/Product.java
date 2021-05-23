@@ -1,12 +1,15 @@
-package ru.geekbrains;
+package ru.geekbrains.entities;
 
 import java.math.BigDecimal;
 
-
 public class Product {
+
     private Long id;
     private String name;
     private BigDecimal price;
+
+    public Product() {
+    }
 
     public Product(Long id, String name, BigDecimal price) {
         this.id = id;
