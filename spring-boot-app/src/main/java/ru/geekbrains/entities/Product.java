@@ -1,5 +1,7 @@
 package ru.geekbrains.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -13,7 +15,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "products")
-public class Product implements Serializable {
+public class Product {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -27,6 +29,7 @@ public class Product implements Serializable {
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
+    @JsonBackReference
     private List<User> users;
 
     public Product() {
