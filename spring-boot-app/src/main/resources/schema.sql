@@ -28,6 +28,16 @@ VALUES ('phone', 1000),
        ('printer', 2500),
        ('notebook', 1450),
        ('mouse', 150),
+       ('RAM', 250),
+       ('SSD', 250),
+       ('HDD', 250),
+       ('display', 250),
+       ('headphone', 250),
+       ('cartridge', 250),
+       ('USB', 250),
+       ('microphone', 250),
+       ('keyboard', 250),
+       ('keyboard', 250),
        ('keyboard', 250);
 
 DROP TABLE IF EXISTS user_orders CASCADE;
