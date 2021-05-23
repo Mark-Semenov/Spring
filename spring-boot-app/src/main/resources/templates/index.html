@@ -24,10 +24,18 @@
         <td><a th:href="@{'/products/' + ${product.id}}">Get</a></td>
         <td><a th:href="@{'/update/' + ${product.id}}">Update</a></td>
         <td><a th:href="@{'/delete/' + ${product.id}}">Delete</a></td>
+        <h3 th:if="${product.name.isEmpty() or product.price == null}">Please input product name and price</h3>
     </tr>
     </tbody>
 </table>
+
 <a th:href="@{'/add'}">Add product</a>
+<a th:href="@{'/min'}">Min</a>
+<a th:href="@{'/max'}">Max</a>
+<a th:href="@{'/middle'}">Middle</a>
+<a th:href="@{'/products'}">All</a>
+
+
 
 </body>
 </html>
